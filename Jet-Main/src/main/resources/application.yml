@@ -1,0 +1,22 @@
+jet:
+  name: Jet-stage
+  version: 1.0
+  copyrightYear: 2021
+  profile: /Users/cheng/JetStage/uploadPath
+  addressEnable: false
+  captchaType: math # 驗證碼類型 math or char
+  demoEnabled: true
+
+# 開發環境設定
+server:
+  port: 8080
+  servlet:
+    # AP access path
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      # Tomcat最大執行緒數量，預設為200
+      max: 800
+      # Tomcat啟動初始化的執行緒數量，預設為25
+      min-spare: 30
