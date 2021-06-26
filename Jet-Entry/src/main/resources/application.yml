@@ -20,3 +20,9 @@ server:
       max: 800
       # Tomcat啟動初始化的執行緒數量，預設為25
       min-spare: 30
+
+# Log
+logging:
+  level:
+    com.cheng: debug
+    org.springframework: warn

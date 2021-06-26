@@ -7,12 +7,12 @@
     <groupId>com.cheng</groupId>
     <artifactId>Jet-Stage</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
     <name>Cheng-Jet</name>
     <description>仿照RUI開發管理系統</description>
 
     <properties>
+        <jet.version>1.0-SNAPSHOT</jet.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -32,6 +32,7 @@
         <poi.version>5.0.0</poi.version>
         <fastjson.version>1.2.76</fastjson.version>
         <kaptcha.version>2.3.2</kaptcha.version>
+        <lombok.version>1.18.16</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -171,17 +172,42 @@
             <dependency>
                 <groupId>com.cheng</groupId>
                 <artifactId>Jet-Generator</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${jet.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.cheng</groupId>
+                <artifactId>Jet-Entry</artifactId>
+                <version>${jet.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.cheng</groupId>
+                <artifactId>Jet-Common</artifactId>
+                <version>${jet.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.cheng</groupId>
+                <artifactId>Jet-Core</artifactId>
+                <version>${jet.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <modules>
         <module>Jet-Generator</module>
-        <module>Jet-Main</module>
+        <module>Jet-Core</module>
+        <module>Jet-Entry</module>
+        <module>Jet-Common</module>
     </modules>
-
+    <packaging>pom</packaging>
 
     <build>
         <plugins>

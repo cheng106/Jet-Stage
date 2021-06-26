@@ -1,0 +1,8 @@
+gen:
+  author: cheng
+  # 預設產生package的路徑 system 需要改成自己的模組名稱 如 system monitor tool
+  packageName: com.cheng.system
+  # 自動拿掉表格前綴名稱，預設是false
+  autoRemovePre: false
+  # 表格前綴 (產生類別名稱不會包含表格前綴，多個用逗號分隔)
+  tablePrefix: sys_
