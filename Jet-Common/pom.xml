@@ -11,11 +11,6 @@
 
     <artifactId>Jet-Common</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
     <dependencies>
         <!-- Spring framework core -->
         <dependency>
@@ -119,6 +114,7 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

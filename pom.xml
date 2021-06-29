@@ -194,6 +194,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.cheng</groupId>
+                <artifactId>Jet-System</artifactId>
+                <version>${jet.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
@@ -206,6 +212,7 @@
         <module>Jet-Core</module>
         <module>Jet-Entry</module>
         <module>Jet-Common</module>
+        <module>Jet-System</module>
     </modules>
     <packaging>pom</packaging>
 

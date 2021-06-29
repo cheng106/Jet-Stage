@@ -1,4 +1,4 @@
-package com.cheng.entry;
+package com.cheng;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

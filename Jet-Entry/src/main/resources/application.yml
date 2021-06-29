@@ -21,6 +21,15 @@ server:
       # Tomcat啟動初始化的執行緒數量，預設為25
       min-spare: 30
 
+# Token設定
+token:
+  # 可自定義標頭
+  header: Authorization
+  # 密鑰
+  secret: jet-ndjrn3fn
+  # 有效期限：預設30分
+  expireTime: 30
+
 # Log
 logging:
   level:
