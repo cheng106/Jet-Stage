@@ -18,4 +18,6 @@ public class Constants {
      * 登入帳號 redis key
      */
     public static final String LOGIN_TOKEN_KEY = "login_tokens:";
+
+    public static final String UTF8 = "UTF-8";
 }
