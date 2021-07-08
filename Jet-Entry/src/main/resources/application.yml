@@ -21,6 +21,13 @@ server:
       # Tomcat啟動初始化的執行緒數量，預設為25
       min-spare: 30
 
+spring:
+  profiles:
+    active: druid
+  devtools:
+    restart:
+      enabled: true
+
 # Token設定
 token:
   # 可自定義標頭
@@ -29,6 +36,15 @@ token:
   secret: jet-ndjrn3fn
   # 有效期限：預設30分
   expireTime: 30
+
+# MyBatis設定
+mybatis:
+  # 搜尋指定的Package
+  typeAliasesPackage: com.cheng.**.entity
+  # 指定mapper.xml位置
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 載入設定檔
+  configLocation: classpath:mybatis-config.xml
 
 # Log
 logging:

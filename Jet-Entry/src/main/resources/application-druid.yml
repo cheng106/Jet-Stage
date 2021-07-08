@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      # 主資料庫設定
+      master:
+        url: jdbc:mysql://localhost:3306/jet-stage?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: demouser
+        password: e23s5
+      # 副資料庫設定
+      slave:
+        # 副DB預設關閉
+        enabled: false
+        url:
+        username:
+        password:
+      # 初始連接數
+      initialSize: 5
+      # 最小連接池數量
+      minIdle: 10
+      # 最大連接池數量
+      maxActive: 20
+      # 連接等待逾時時間
+      maxWait: 60000
+      # 間隔多久檢測一次，檢測需要關閉空閒的連接，單位毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 一個連接在池中最小生存時間，單位毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 一個連接在池中最大生存時間，單位毫秒
+      maxEvictableIdleTimeMillis: 900000
+      # 檢測連接是否有效
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        # 設定白名單，不寫則表示全部允許訪問
+        allow:
+        url-pattern: /druid/*
+        # 資料庫控制台的帳號和密碼
+        login-username: cheng
+        login-password: e23s5
+      filter:
+        stat:
+          enabled: true
+          # 慢SQL紀錄
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
