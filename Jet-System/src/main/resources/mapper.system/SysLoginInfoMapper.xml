@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.system.mapper.SysLoginInfoMapper">
+
+    <resultMap type="com.cheng.system.domain.SysLoginInfo" id="SysLoginInfoResult">
+        <id property="infoId" column="info_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="status" column="status"/>
+        <result property="ipaddr" column="ipaddr"/>
+        <result property="loginLocation" column="login_location"/>
+        <result property="browser" column="browser"/>
+        <result property="os" column="os"/>
+        <result property="msg" column="msg"/>
+        <result property="loginTime" column="login_time"/>
+    </resultMap>
+
+    <insert id="insertLoginInfo" parameterType="com.cheng.system.domain.SysLoginInfo">
+        INSERT INTO sys_loginInfo (user_name, status, ipaddr, login_location, browser, os, msg, login_time)
+        VALUES (#{userName}, #{status}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{msg}, sysdate())
+    </insert>
+
+    <select id="selectLoginInfoList" parameterType="com.cheng.system.domain.SysLoginInfo"
+            resultMap="SysLoginInfoResult">
+        SELECT info_id, user_name, ipaddr, login_location, browser, os, status, msg, login_time FROM sys_loginInfo
+        <where>
+            <if test="ipaddr != null and ipaddr != ''">
+                AND ipaddr LIKE CONCAT('%', #{ipaddr}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+            <if test="userName != null and userName != ''">
+                AND user_name LIKE CONCAT('%', #{userName}, '%')
+            </if>
+            <if test="params.beginTime != null and params.beginTime != ''"><!-- 開始時間 -->
+                AND DATE_FORMAT(login_time,'%y%m%d') &gt;= DATE_FORMAT(#{params.beginTime},'%y%m%d')
+            </if>
+            <if test="params.endTime != null and params.endTime != ''"><!-- 結束時間 -->
+                AND DATE_FORMAT(login_time,'%y%m%d') &lt;= DATE_FORMAT(#{params.endTime},'%y%m%d')
+            </if>
+        </where>
+        ORDER BY info_id DESC
+    </select>
+
+    <delete id="deleteLoginInfoByIds" parameterType="Long">
+        DELETE FROM sys_loginInfo WHERE info_id IN
+        <foreach collection="array" item="infoId" open="(" separator="," close=")">
+            #{infoId}
+        </foreach>
+    </delete>
+
+    <update id="cleanLoginInfo">
+        TRUNCATE table sys_loginInfo
+    </update>
+
+</mapper> 

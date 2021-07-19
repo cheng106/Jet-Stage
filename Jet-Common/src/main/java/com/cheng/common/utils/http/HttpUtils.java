@@ -2,16 +2,16 @@ package com.cheng.common.utils.http;
 
 import com.cheng.common.constant.Constants;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.net.ssl.*;
 import java.io.*;
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * HTTP發送共用方法
@@ -26,7 +26,7 @@ public class HttpUtils {
      * @param param 請求參數 (name1=value1&name2=value2)
      * @return 請求後的回應結果
      */
-    public static String sendGet(String url, String param) {
+    public static String sendGet(String url, Map<String, ?> param) {
         return sendGet(url, param, Constants.UTF8);
     }
 
@@ -38,11 +38,12 @@ public class HttpUtils {
      * @param contentType 編碼類型
      * @return 請求後的回應結果
      */
-    public static String sendGet(String url, String param, String contentType) {
+    public static String sendGet(String url, Map<String, ?> param, String contentType) {
         StringBuilder result = new StringBuilder();
         BufferedReader in = null;
         try {
-            String urlNameString = url + "?" + param;
+            String urlNameString = url + "?" + params(param);
+            System.out.println("urlNameString = " + urlNameString);
             log.info("###sendGet -> {}", urlNameString);
             URL u = new URL(urlNameString);
             URLConnection connection = u.openConnection();
@@ -171,6 +172,24 @@ public class HttpUtils {
             log.error("###HttpsUtil.sendSSLPost Exception, url={}, param={}", url, param, e);
         }
         return result.toString();
+    }
+
+    private static String params(Map<String, ?> params) {
+        if (params == null) {
+            return "";
+        }
+
+        return params.entrySet().stream()
+                .map(e -> {
+                    try {
+                        return String.format("%s=%s", e.getKey(), URLEncoder.encode(e.getValue().toString(), StandardCharsets.UTF_8.name()));
+                    } catch (Exception err) {
+                        log.warn("url encode error ===> {}:{}", e.getKey(), e.getValue());
+                        return null;
+                    }
+                })
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.joining("&"));
     }
 
     private static class TrustAnyTrustManager implements X509TrustManager {

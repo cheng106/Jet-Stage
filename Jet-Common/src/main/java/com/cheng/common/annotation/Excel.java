@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 import java.math.BigDecimal;
 
 /**
- * @description: 自定義匯出Excel欄位註解
+ * 自定義匯出Excel欄位註解
  **/
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

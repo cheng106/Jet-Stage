@@ -46,6 +46,13 @@ mybatis:
   # 載入設定檔
   configLocation: classpath:mybatis-config.xml
 
+# PageHelper分頁套件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
 # Log
 logging:
   level:

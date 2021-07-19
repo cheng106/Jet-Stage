@@ -70,10 +70,10 @@ public class TokenService {
      * @param user Login user
      * @return Token
      */
-    public String createToken(LoginUser user, @RequestHeader("User-Agent") String userAgent) {
+    public String createToken(LoginUser user) {
         String token = UUID.randomUUID().toString();
         user.setToken(token);
-        setUserAgent(user, userAgent);
+        setUserAgent(user);
         refreshToken(user);
 
         Map<String, Object> claims = new HashMap<String, Object>() {{
@@ -87,8 +87,8 @@ public class TokenService {
      *
      * @param user Login user
      */
-    public void setUserAgent(LoginUser user, String ua) {
-        UserAgent userAgent = UserAgent.parseUserAgentString(ua);
+    public void setUserAgent(LoginUser user) {
+        UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
         String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
         user.setLoginIp(ip);
         user.setLoginLocation(AddressUtils.getRealAddressByIP(ip));

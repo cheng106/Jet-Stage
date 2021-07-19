@@ -33,6 +33,7 @@
         <fastjson.version>1.2.76</fastjson.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <lombok.version>1.18.16</lombok.version>
+        <retrofit.version>2.2.12</retrofit.version>
     </properties>
 
     <dependencyManagement>
@@ -203,6 +204,12 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.lianjiatech</groupId>
+                <artifactId>retrofit-spring-boot-starter</artifactId>
+                <version>${retrofit.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
