@@ -13,6 +13,7 @@ import com.cheng.common.utils.ServletUtils;
 import com.cheng.common.utils.ip.IpUtils;
 import com.cheng.core.manager.AsyncManager;
 import com.cheng.core.manager.factory.AsyncFactory;
+import com.cheng.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -35,8 +36,8 @@ public class SysLoginService {
     @Autowired
     private RedisService redisService;
 
-//    @Autowired
-//    private SysUserService userService;
+    @Autowired
+    private SysUserService userService;
 
     public String login(String username, String password, String code, String uuid) {
         String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;

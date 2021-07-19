@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class SysRoleServiceImpl implements SysRoleService {
+
     @Resource
     private SysRoleMapper roleMapper;
 

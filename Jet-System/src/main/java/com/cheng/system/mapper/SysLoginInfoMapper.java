@@ -2,14 +2,12 @@ package com.cheng.system.mapper;
 
 
 import com.cheng.system.domain.SysLoginInfo;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * 系統訪問日誌情況資訊
  */
-@Repository
 public interface SysLoginInfoMapper {
     /**
      * 新增系統登入日誌

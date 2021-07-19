@@ -3,15 +3,15 @@ package com.cheng.system.service.impl;
 import com.cheng.system.domain.SysLoginInfo;
 import com.cheng.system.mapper.SysLoginInfoMapper;
 import com.cheng.system.service.SysLoginInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class SysLoginInfoServiceImpl implements SysLoginInfoService {
 
-    @Autowired
+    @Resource
     private SysLoginInfoMapper loginInfoMapper;
 
     @Override

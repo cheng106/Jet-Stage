@@ -22,6 +22,7 @@ import java.util.List;
 @Slf4j
 @Service
 public class SysUserServiceImpl implements SysUserService {
+
     @Resource
     private SysUserMapper userMapper;
     @Resource
