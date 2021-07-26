@@ -50,4 +50,14 @@ public class Constants {
      * 登出
      */
     public static final String LOGOUT = "Logout";
+
+    /**
+     * 檔案映設路徑 前綴
+     */
+    public static final String RESOURCE_PREFIX = "/profile";
+
+    /**
+     * 防止重複提交 redis key
+     */
+    public static final String REPEAT_SUBMIT_KEY = "repeat_submit:";
 }

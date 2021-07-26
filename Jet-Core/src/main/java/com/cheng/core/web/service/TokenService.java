@@ -13,9 +13,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -51,10 +51,10 @@ public class TokenService {
     /**
      * 取得帳號身份訊息
      *
-     * @param authToken 從Request Header取得Token
+     * @param request 從Request Header取得Token
      */
-    public LoginUser getLoginUser(@RequestHeader("Authorization") String authToken) {
-        String token = getToken(authToken);
+    public LoginUser getLoginUser(HttpServletRequest request) {
+        String token = getToken(request);
         if (StringUtils.isNotEmpty(token)) {
             Claims claims = parseToken(token);
             String uuid = String.valueOf(claims.get(Constants.LOGIN_USER_KEY));
@@ -80,6 +80,18 @@ public class TokenService {
             put(Constants.LOGIN_USER_KEY, token);
         }};
         return createToken(claims);
+    }
+
+    /**
+     * 刪除使用者身份訊息
+     *
+     * @param token token
+     */
+    public void delLoginUser(String token) {
+        if (StringUtils.isNotEmpty(token)) {
+            String userKey = getTokenKey(token);
+            redisService.deleteObject(userKey);
+        }
     }
 
     /**
@@ -150,9 +162,10 @@ public class TokenService {
     /**
      * 從Request Header取得Token
      *
-     * @param token Token
+     * @param request request
      */
-    private String getToken(String token) {
+    private String getToken(HttpServletRequest request) {
+        String token = request.getHeader(header);
         if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)) {
             token = token.replace(Constants.TOKEN_PREFIX, "");
         }
